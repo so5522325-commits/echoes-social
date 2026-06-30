@@ -37,3 +37,5 @@ async function fetchPosts() {
 
 window.onload = fetchPosts;
 
+window.signUp = signUp;
+window.login = login;
