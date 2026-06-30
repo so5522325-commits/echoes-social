@@ -35,22 +35,26 @@ async function fetchPosts() {
     } catch (e) { console.log(e); }
 }
 async function signUp() {
-    const email = document.getElementById('email').value;
+    async function signUp() {
+    // Purani line hata kar ye daalein:
+    const username = document.getElementById('username').value;
+    const fakeEmail = username + "@echoes.com";
     const password = document.getElementById('password').value;
     try {
-        await account.create(ID.unique(), email, password);
+        await account.create(ID.unique(), fakeEmail, password);
         alert("Signup Success!");
     } catch (error) {
         alert("Error: " + error.message);
     }
-}
+    }
+    
 
 async function login() {
     const username = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     try {
-        await account.createEmailPasswordSession(email, password);
-        alert("Login Successful!");
+        await 
+        alert("Loginaccount.createEmailPasswordSession(username, password) Successful!");
         // Yahan page switch ka code aayega
         document.getElementById('auth-page').style.display = 'none';
         document.getElementById('home-page').style.display = 'block';
