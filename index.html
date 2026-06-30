@@ -8,6 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.0"></script>
 </head>
 <body>
+    <!-- Isko body tag ke andar kahi bhi rakhein -->
+<div id="auth-form">
+    <h3>Login ya Sign Up karein</h3>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="signUp()">Sign Up</button>
+    <button onclick="login()">Login</button>
+</div>
+    
     <div id="mySidebar" class="sidebar">
         <span class="close-btn" onclick="closeNav()">&times;</span>
         <a onclick="showPage('home')">🏠 Home</a>
