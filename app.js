@@ -34,6 +34,30 @@ async function fetchPosts() {
         });
     } catch (e) { console.log(e); }
 }
+async function signUp() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    try {
+        await account.create(ID.unique(), email, password);
+        alert("Signup Success!");
+    } catch (error) {
+        alert("Error: " + error.message);
+    }
+}
+
+async function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    try {
+        await account.createEmailPasswordSession(email, password);
+        alert("Login Successful!");
+        // Yahan page switch ka code aayega
+        document.getElementById('auth-page').style.display = 'none';
+        document.getElementById('home-page').style.display = 'block';
+    } catch (error) {
+        alert("Login Failed: " + error.message);
+    }
+}
 
 window.onload = fetchPosts;
 
