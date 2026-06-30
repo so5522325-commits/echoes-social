@@ -46,7 +46,7 @@ async function signUp() {
 }
 
 async function login() {
-    const email = document.getElementById('email').value;
+    const username = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     try {
         await account.createEmailPasswordSession(email, password);
