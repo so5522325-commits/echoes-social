@@ -1,4 +1,4 @@
-import { databases, 6a414c58001cef943254, nexus_os_ } from './api.js';
+import { databases, 6a414c58001cef943254,  nexus_os_} from './api.js';
 const { ID } = Appwrite;
 
 window.openNav = () => document.getElementById("mySidebar").classList.add("active");
@@ -34,36 +34,6 @@ async function fetchPosts() {
         });
     } catch (e) { console.log(e); }
 }
-async function signUp() {
-    async function signUp() {
-    // Purani line hata kar ye daalein:
-    const username = document.getElementById('username').value;
-    const fakeEmail = username + "@echoes.com";
-    const password = document.getElementById('password').value;
-    try {
-        await account.create(ID.unique(), fakeEmail, password);
-        alert("Signup Success!");
-    } catch (error) {
-        alert("Error: " + error.message);
-    }
-    }
-    
-
-async function login() {
-    const username = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    try {
-        await 
-        alert("Loginaccount.createEmailPasswordSession(username, password) Successful!");
-        // Yahan page switch ka code aayega
-        document.getElementById('auth-page').style.display = 'none';
-        document.getElementById('home-page').style.display = 'block';
-    } catch (error) {
-        alert("Login Failed: " + error.message);
-    }
-}
 
 window.onload = fetchPosts;
-
-window.signUp = signUp;
-window.login = login;
+                                   
