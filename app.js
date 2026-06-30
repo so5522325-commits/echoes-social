@@ -1,4 +1,4 @@
-import { databases, DATABASE_ID, COLLECTION_ID } from './api.js';
+import { databases, 6a414c58001cef943254, nexus_os_ } from './api.js';
 const { ID } = Appwrite;
 
 window.openNav = () => document.getElementById("mySidebar").classList.add("active");
@@ -13,7 +13,7 @@ window.addPost = async () => {
     const input = document.getElementById('postInput');
     if (!input.value.trim()) return;
     try {
-        await databases.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
+        await databases.createDocument(6a414c58001cef943254, nexus_os_, ID.unique(), {
             caption: input.value // Database mein 'caption' column hona chahiye
         });
         input.value = '';
@@ -23,7 +23,7 @@ window.addPost = async () => {
 
 async function fetchPosts() {
     try {
-        const response = await databases.listDocuments(DATABASE_ID, COLLECTION_ID);
+        const response = await databases.listDocuments(6a414c58001cef943254, nexus_os_);
         const feed = document.getElementById('feed');
         feed.innerHTML = '';
         response.documents.forEach(doc => {
