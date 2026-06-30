@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echoes Social</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.0"></script>
+</head>
+<body>
+    <div id="mySidebar" class="sidebar">
+        <span class="close-btn" onclick="closeNav()">&times;</span>
+        <a onclick="showPage('home')">🏠 Home</a>
+        <a onclick="showPage('profile')">👤 Profile</a>
+    </div>
+
+    <div class="header">
+        <div style="font-size: 28px; cursor: pointer; color: #7C3AED; margin-right: 20px;" onclick="openNav()">☰</div>
+        <div style="font-weight:bold; font-size:24px; color:#7C3AED;">Echoes</div>
+    </div>
+
+    <div id="home" class="page active-page">
+        <div class="post-card">
+            <textarea id="postInput" placeholder="Apni yaad likhein..."></textarea>
+            <button onclick="addPost()">Post Yaad</button>
+        </div>
+        <div id="feed"></div>
+    </div>
+
+    <div id="profile" class="page">
+        <div class="post-card" style="text-align: center;">
+            <h2>Echoes User</h2>
+            <p>Safar-e-yaadein...</p>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
