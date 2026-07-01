@@ -1,59 +1,48 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echoes Social</title>
+    <title>Echoes</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="sidebar-overlay" class="sidebar-overlay"></div>
-    <div id="mySidebar" class="sidebar">
-    <span id="close-nav" class="close-btn" style="padding:10px; cursor:pointer;">&times;</span>
-    <a id="nav-home" style="display:block; padding:15px; cursor:pointer;">🏠 Home</a>
-    <a id="nav-profile" style="display:block; padding:15px; cursor:pointer;">👤 Profile</a>
-    <a id="nav-messages" style="display:block; padding:15px; cursor:pointer;">💬 Messages</a>
-</div>
-
-<div id="messages" class="page">
-    <div class="post-card">
-        <h2>Private Messages</h2>
-        <p>Yahan aapke messages dikhenge...</p>
-    </div>
-</div>
-    <div id="auth-page" class="page active-page">
-        <div class="post-card">
-            <h2 id="auth-title">Login</h2>
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
-            <button id="auth-btn">Login</button>
-            <p id="toggle-auth-btn" style="margin-top:10px; cursor:pointer; color:#7C3AED; text-align:center;">Naye ho? Sign Up karein</p>
-        </div>
+    <div id="sidebar" class="sidebar">
+        <input type="text" id="searchBar" placeholder="Search..." oninput="filterPosts()">
+        <a onclick="showPage('home')">🏠 Home</a>
+        <a onclick="showPage('profile')">👤 Profile</a>
+        <a onclick="logout()" style="color:red;">🚪 Logout</a>
     </div>
 
-    <div id="main-app" style="display:none;">
-        <div class="header">
-            <div id="open-nav" style="cursor:pointer; font-size:24px;">☰</div>
-            <div class="logo">Echoes</div>
-            <div id="toggle-menu" class="menu-dots" style="cursor:pointer;">⋮</div>
+    <header id="main-header">
+        <div id="menu-btn" onclick="toggleNav()">≡</div>
+        <div class="logo">ECHOES</div>
+        <div></div>
+    </header>
+
+    <main id="content">
+        <div id="login-page" class="page active">
+            <div class="glass-card">
+                <h2>Welcome to Echoes</h2>
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="registerUser()">Sign Up</button>
+                <button onclick="loginUser()" style="background:#555; margin-top:10px;">Login</button>
+            </div>
         </div>
-        <div id="dropdown" class="dropdown-content">
-            <a id="logout-btn" style="color:red; cursor:pointer;">Logout</a>
-        </div>
-        <div id="home" class="page active-page">
-            <div class="post-card">
-                <textarea id="postInput" placeholder="Apni yaad likhein..."></textarea>
-                <button id="add-post-btn">Post Yaad</button>
+        <div id="home" class="page">
+            <div class="glass-card">
+                <textarea id="postInput" placeholder="Kya yaad hai?"></textarea>
+                <button onclick="addPost()">Post Yaad</button>
             </div>
             <div id="feed"></div>
         </div>
         <div id="profile" class="page">
-            <div class="post-card" style="text-align: center;">
-                <h2>My Profile</h2>
-                <p id="user-display">Username</p>
+            <div class="glass-card">
+                <h2>User Profile</h2>
+                <button onclick="logout()">Logout</button>
             </div>
         </div>
-    </div>
+    </main>
     <script type="module" src="app.js"></script>
 </body>
 </html>
