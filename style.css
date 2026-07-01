@@ -1,17 +1,1 @@
-body { background: #050505; color: white; font-family: sans-serif; margin: 0; }
-#main-header { display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #333; }
-#menu-btn { cursor: pointer; font-size: 35px; margin-right: 20px; }
-.logo { font-weight: bold; font-size: 22px; color: #7C3AED; }
-.sidebar { height: 100%; width: 0; position: fixed; top: 0; left: 0; background: #111; padding-top: 80px; transition: 0.3s; visibility: hidden; z-index: 100; }
-.sidebar.active { width: 250px; visibility: visible; }
-.sidebar a, #searchBar { display: block; padding: 15px; color: white; text-decoration: none; cursor: pointer; }
-.glass-card { background: #1a1a1a; padding: 20px; border-radius: 15px; margin: 15px; }
-.post-item { margin: 15px; padding: 15px; border: 1px solid #333; border-radius: 10px; position: relative; }
-.page { display: none; }
-.page.active { display: block; }
-.hidden { display: none !important; }
-/* Delete Menu Right Side */
-.dots-menu { cursor: pointer; font-size: 22px; position: absolute; right: 15px; top: 10px; }
-.delete-btn { display: none; background: #333; padding: 6px; border-radius: 5px; cursor: pointer; position: absolute; right: 40px; top: 10px; z-index: 10; }
-.dots-menu:hover + .delete-btn, .delete-btn:hover { display: block; }
-button { width: 100%; padding: 12px; background: #7C3AED; border: none; color: white; border-radius: 8px; cursor: pointer; margin-top: 5px; }
+
