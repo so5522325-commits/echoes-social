@@ -1,74 +1,57 @@
-import { databases, DATABASE_ID, COLLECTION_ID, account } from './api.js';
-import { Query, ID } from "https://cdn.jsdelivr.net/npm/appwrite@14.0.0/+esm";
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echoes Social</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.0"></script>
+</head>
+<body>
+    <div id="auth-page" class="page active-page">
+        <div class="post-card">
+            <h2 id="auth-title">Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button id="auth-btn" onclick="handleAuth()">Login</button>
+            <p onclick="toggleAuth()" style="margin-top:10px; cursor:pointer; color:#7C3AED;">Naye ho? Sign Up karein</p>
+        </div>
+    </div>
 
-let isLogin = true;
-window.toggleAuth = () => {
-    isLogin = !isLogin;
-    document.getElementById('auth-title').innerText = isLogin ? 'Login' : 'Sign Up';
-    document.getElementById('auth-btn').innerText = isLogin ? 'Login' : 'Sign Up';
-};
+    <div id="main-app" style="display:none;">
+        <div id="mySidebar" class="sidebar">
+            <span class="close-btn" onclick="closeNav()" style="padding:10px; cursor:pointer;">&times;</span>
+            <a onclick="showPage('home')">🏠 Home</a>
+            <a onclick="showPage('profile')">👤 Profile</a>
+        </div>
 
-window.handleAuth = async () => {
-    const user = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value.trim();
-    if (!user || !pass) return alert("Sabhi fields bharein!");
-    try {
-        if (isLogin) await account.createEmailPasswordSession(`${user}@echoes.com`, pass);
-        else await account.create(ID.unique(), `${user}@echoes.com`, pass, user);
-        location.reload();
-    } catch (e) { alert(e.message); }
-};
-
-window.logout = async () => { await account.deleteSession('current'); location.reload(); };
-window.openNav = () => document.getElementById("mySidebar").classList.add("active");
-window.closeNav = () => document.getElementById("mySidebar").classList.remove("active");
-window.toggleMenu = () => {
-    const d = document.getElementById("dropdown");
-    d.style.display = (d.style.display === 'block') ? 'none' : 'block';
-};
-window.showPage = (id) => {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-    document.getElementById(id).classList.add('active-page');
-    closeNav();
-};
-
-window.addPost = async () => {
-    const input = document.getElementById('postInput');
-    if (!input.value.trim()) return;
-    try {
-        await databases.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), { 
-            caption: input.value 
-        });
-        input.value = ''; 
-        await fetchPosts();
-    } catch (e) { alert("Error: " + e.message); }
-};
-
-async function checkUser() {
-    try {
-        const user = await account.get();
-        document.getElementById('auth-page').style.display = 'none';
-        document.getElementById('main-app').style.display = 'block';
-        document.getElementById('user-display').innerText = user.name;
-        fetchPosts();
-    } catch (e) {}
-}
-
-async function fetchPosts() {
-    try {
-        const response = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
-            Query.orderDesc("$createdAt")
-        ]);
-        const feed = document.getElementById('feed');
-        feed.innerHTML = '';
+        <div class="header">
+            <div style="cursor:pointer; font-size:24px;" onclick="openNav()">☰</div>
+            <div class="logo">Echoes</div>
+            <div class="menu-dots" onclick="toggleMenu()">⋮</div>
+        </div>
         
-        response.documents.forEach(doc => {
-            const div = document.createElement('div');
-            div.className = 'post-card';
-            div.innerHTML = `<p>${doc.caption}</p>`;
-            feed.appendChild(div);
-        });
-    } catch (e) { console.error(e); }
-}
+        <div id="dropdown" class="dropdown-content">
+            <a onclick="logout()" style="color:red; cursor:pointer;">Logout</a>
+        </div>
 
-window.onload = checkUser;
+        <div id="home" class="page active-page">
+            <div class="post-card">
+                <div class="post-input-container">
+                    <textarea id="postInput" placeholder="Apni yaad likhein..."></textarea>
+                    <button onclick="addPost()">Post Yaad</button>
+                </div>
+            </div>
+            <div id="feed"></div>
+        </div>
+
+        <div id="profile" class="page">
+            <div class="post-card" style="text-align: center;">
+                <h2>My Profile</h2>
+                <p id="user-display">Username</p>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
