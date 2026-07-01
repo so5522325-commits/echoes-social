@@ -29,14 +29,12 @@ window.loginUser = async () => {
 };
 
 window.addPost = async () => {
-    const input = document.getElementById('postInput');
-    if(!input.value.trim()) return;
     try {
         const user = await account.get();
-        await databases.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), { caption: input.value, userId: user.$id });
-        input.value = '';
+        await databases.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), { caption: document.getElementById('postInput').value, userId: user.$id });
+        document.getElementById('postInput').value = '';
         loadFeed();
-    } catch(e) { alert("Session error! Please re-login."); }
+    } catch(e) { alert("Login error: Please re-login."); }
 };
 
 window.loadFeed = async () => {
@@ -45,16 +43,12 @@ window.loadFeed = async () => {
     const res = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [Query.orderDesc("$createdAt")]);
     document.getElementById('feed').innerHTML = res.documents.map(d => `
         <div class="post-item">
-            ${(user && d.userId === user.$id) ? `
-                <div class="dots-menu">⋮</div>
-                <div class="delete-btn" onclick="deletePost('${d.$id}')">Delete</div>
-            ` : ''}
+            ${(user && d.userId === user.$id) ? `<div class="dots-menu">⋮</div><div class="delete-btn" onclick="deletePost('${d.$id}')">Delete</div>` : ''}
             <b style="color:#7C3AED;">User: ${d.userId.slice(0,6)}</b>
-            <p style="margin: 10px 0;">${d.caption}</p>
+            <p>${d.caption}</p>
         </div>
     `).join('');
 };
-window.loadFeed = loadFeed;
 
 window.deletePost = async (id) => { await databases.deleteDocument(DATABASE_ID, COLLECTION_ID, id); loadFeed(); };
 window.logout = () => { account.deleteSession('current'); location.reload(); };
