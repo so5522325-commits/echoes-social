@@ -5,46 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Echoes Social</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.0"></script>
 </head>
 <body>
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <div id="mySidebar" class="sidebar">
+    <span id="close-nav" class="close-btn" style="padding:10px; cursor:pointer;">&times;</span>
+    <a id="nav-home" style="display:block; padding:15px; cursor:pointer;">🏠 Home</a>
+    <a id="nav-profile" style="display:block; padding:15px; cursor:pointer;">👤 Profile</a>
+    <a id="nav-messages" style="display:block; padding:15px; cursor:pointer;">💬 Messages</a>
+</div>
+
+<div id="messages" class="page">
+    <div class="post-card">
+        <h2>Private Messages</h2>
+        <p>Yahan aapke messages dikhenge...</p>
+    </div>
+</div>
     <div id="auth-page" class="page active-page">
         <div class="post-card">
             <h2 id="auth-title">Login</h2>
             <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
-            <button id="auth-btn" onclick="handleAuth()">Login</button>
-            <p onclick="toggleAuth()" style="margin-top:10px; cursor:pointer; color:#7C3AED;">Naye ho? Sign Up karein</p>
+            <button id="auth-btn">Login</button>
+            <p id="toggle-auth-btn" style="margin-top:10px; cursor:pointer; color:#7C3AED; text-align:center;">Naye ho? Sign Up karein</p>
         </div>
     </div>
 
     <div id="main-app" style="display:none;">
-        <div id="mySidebar" class="sidebar">
-            <span class="close-btn" onclick="closeNav()" style="padding:10px; cursor:pointer;">&times;</span>
-            <a onclick="showPage('home')">🏠 Home</a>
-            <a onclick="showPage('profile')">👤 Profile</a>
-        </div>
-
         <div class="header">
-            <div style="cursor:pointer; font-size:24px;" onclick="openNav()">☰</div>
+            <div id="open-nav" style="cursor:pointer; font-size:24px;">☰</div>
             <div class="logo">Echoes</div>
-            <div class="menu-dots" onclick="toggleMenu()">⋮</div>
+            <div id="toggle-menu" class="menu-dots" style="cursor:pointer;">⋮</div>
         </div>
-        
         <div id="dropdown" class="dropdown-content">
-            <a onclick="logout()" style="color:red; cursor:pointer;">Logout</a>
+            <a id="logout-btn" style="color:red; cursor:pointer;">Logout</a>
         </div>
-
         <div id="home" class="page active-page">
             <div class="post-card">
-                <div class="post-input-container">
-                    <textarea id="postInput" placeholder="Apni yaad likhein..."></textarea>
-                    <button onclick="addPost()">Post Yaad</button>
-                </div>
+                <textarea id="postInput" placeholder="Apni yaad likhein..."></textarea>
+                <button id="add-post-btn">Post Yaad</button>
             </div>
             <div id="feed"></div>
         </div>
-
         <div id="profile" class="page">
             <div class="post-card" style="text-align: center;">
                 <h2>My Profile</h2>
