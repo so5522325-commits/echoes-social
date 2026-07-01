@@ -12,7 +12,6 @@ window.showPage = (id) => {
 window.registerUser = async () => {
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
-    if(!user || !pass) return alert("Fill all fields");
     try {
         await account.create(ID.unique(), `${user}@echoes.app`, pass, user);
         await account.createEmailPasswordSession(`${user}@echoes.app`, pass);
@@ -37,7 +36,7 @@ window.addPost = async () => {
         await databases.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), { caption: input.value, userId: user.$id });
         input.value = '';
         loadFeed();
-    } catch(e) { alert("Login required!"); }
+    } catch(e) { alert("Session error! Please re-login."); }
 };
 
 window.loadFeed = async () => {
@@ -50,8 +49,8 @@ window.loadFeed = async () => {
                 <div class="dots-menu">⋮</div>
                 <div class="delete-btn" onclick="deletePost('${d.$id}')">Delete</div>
             ` : ''}
-            <b>User: ${d.userId.slice(0,6)}</b>
-            <p>${d.caption}</p>
+            <b style="color:#7C3AED;">User: ${d.userId.slice(0,6)}</b>
+            <p style="margin: 10px 0;">${d.caption}</p>
         </div>
     `).join('');
 };
